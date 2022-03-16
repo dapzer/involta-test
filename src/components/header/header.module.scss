@@ -1,0 +1,35 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 20px;
+  border-bottom: 1px solid #bdbdbd;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+
+    .logo{
+      justify-content: space-between;
+    }
+  }
+
+  button{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    span{
+      pointer-events: none;
+    }
+  }
+
+  .logo{
+    display: flex;
+    align-items: center;
+
+    h1{
+      padding-right: 30px;
+    }
+  }
+}
