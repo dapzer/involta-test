@@ -1,0 +1,41 @@
+.content{
+  height: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  p{
+    padding: 25px 0px;
+  }
+
+  @media screen and (max-width: 490px){
+    p{
+      padding: 20px 0px;
+    }
+  }
+
+
+  div a:first-of-type{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #0029FF;
+  }
+
+  a:first-of-type{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #0029FF;
+  }
+
+  .footerLink{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration-line: underline;
+    color: #0029FF;
+  }
+
+}

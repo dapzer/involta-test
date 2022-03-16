@@ -1,0 +1,52 @@
+.content{
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  div:first-of-type{
+    margin-right: 30px;
+    min-width: 200px;
+    min-height: 100px;
+    max-height: 100px;
+    position: relative;
+  }
+
+  p{
+    padding-top: 20px;
+  }
+
+  a{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #0029FF;
+  }
+
+  .footerLink{
+    display: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration-line: underline;
+    color: #0029FF;
+  }
+
+  @media screen and (max-width: 620px){
+    flex-direction: column;
+    height: unset;
+
+    div:first-of-type{
+      min-width: 100%;
+      min-height: 168px;
+      //max-height: 168px;
+      position: relative;
+    }
+    a:first-of-type{
+      padding-top: 20px;
+    }
+    a:last-of-type{
+      display: block;
+    }
+  }
+}
