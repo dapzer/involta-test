@@ -6,7 +6,6 @@ const SmallContent: FC = () => {
   return (
     <div className={styles.content}>
 
-
       <div>
         <a href={"/"} target="_blank" rel="noreferrer">
           Географическая лаборатория, квест и фестивальная площадка: новые голосования проекта «Активный гражданин»
@@ -16,7 +15,6 @@ const SmallContent: FC = () => {
           аукциона в 26 раз.</p>
 
       </div>
-
 
       <a href={"/"} target="_blank" rel="noreferrer" className={styles.footerLink}>
         Подробнее

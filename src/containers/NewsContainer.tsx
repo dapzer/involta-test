@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
 import Filters from "../components/control-menu/Filters";
-import NewsCard from "../components/news/NewsCard";
 import NewsList from "../components/news/NewsList.";
 
 const NewsContainer: FC = () => {

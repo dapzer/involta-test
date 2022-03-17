@@ -6,7 +6,7 @@ const BigContent: FC = () => {
   return (
     <div className={styles.content}>
       <div>
-        <Image src={"/news-preview.jpg"} height={100} width={100} layout={"fill"} objectFit="cover" />
+        <Image src={"/news-preview.jpg"} layout={"fill"} objectFit="cover" />
       </div>
 
 

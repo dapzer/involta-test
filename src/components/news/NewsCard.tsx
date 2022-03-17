@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import styles from "./news-card.module.scss"
 import BigContent from "./BigContent";
 import SmallContent from "./SmallContent";
