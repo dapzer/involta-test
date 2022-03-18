@@ -1,26 +1,31 @@
 import React, { FC } from 'react';
 import styles from "./big-content.module.scss";
 import Image from "next/image";
+import { MosNewsType } from "../../types/mosNewsType";
+import { NewsType } from "../../types/newsType";
 
-const BigContent: FC = () => {
+interface Props {
+  post: NewsType;
+}
+
+const BigContent: FC<Props> = ({post}) => {
   return (
     <div className={styles.content}>
       <div>
-        <Image src={"/news-preview.jpg"} layout={"fill"} objectFit="cover" />
+        {post.img && <Image src={post.img} layout={"fill"} objectFit="cover"/>}
       </div>
 
 
       <div>
-        <a href={"/"} target="_blank" rel="noreferrer">
-          Географическая лаборатория, квест и фестивальная площадка: новые голосования проекта «Активный гражданин»
+        <a href={post.link} target="_blank" rel="noreferrer">
+          {post.title}
         </a>
 
-        <p>На каждый участок претендовали в среднем шесть участников. Стоимость одной из сделок выросла в ходе
-          аукциона в 26 раз.</p>
+        <p>{post.description}</p>
 
       </div>
 
-      <a href={"/"} target="_blank" rel="noreferrer" className={styles.footerLink}>
+      <a href={post.link} target="_blank" rel="noreferrer" className={styles.footerLink}>
         Подробнее
       </a>
     </div>

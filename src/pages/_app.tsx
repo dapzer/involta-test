@@ -1,23 +1,27 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import Layout from "./layout";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import React from 'react';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    }
-  }
-})
+
 
 function MyApp({Component, pageProps}: AppProps) {
+  const [queryClient] = React.useState(() => new QueryClient({
+    defaultOptions:{
+      queries:{
+        refetchOnWindowFocus: false
+      }
+    }
+  }))
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Hydrate>
     </QueryClientProvider>
   )
 }

@@ -1,22 +1,26 @@
 import React, { FC } from 'react';
 import styles from "./small-content.module.scss"
+import { MosNewsType } from "../../types/mosNewsType";
+import { NewsType } from "../../types/newsType";
 
+interface Props {
+  post: NewsType;
+}
 
-const SmallContent: FC = () => {
+const SmallContent: FC<Props> = ({post}) => {
   return (
     <div className={styles.content}>
 
       <div>
-        <a href={"/"} target="_blank" rel="noreferrer">
-          Географическая лаборатория, квест и фестивальная площадка: новые голосования проекта «Активный гражданин»
+        <a href={post.link} target="_blank" rel="noreferrer">
+          {post.title}
         </a>
 
-        <p>На каждый участок претендовали в среднем шесть участников. Стоимость одной из сделок выросла в ходе
-          аукциона в 26 раз.</p>
+        <p>{post.description}</p>
 
       </div>
 
-      <a href={"/"} target="_blank" rel="noreferrer" className={styles.footerLink}>
+      <a href={post.link} target="_blank" rel="noreferrer" className={styles.footerLink}>
         Подробнее
       </a>
     </div>

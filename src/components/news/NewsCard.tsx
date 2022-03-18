@@ -2,24 +2,27 @@ import React, { FC } from 'react';
 import styles from "./news-card.module.scss"
 import BigContent from "./BigContent";
 import SmallContent from "./SmallContent";
+import { MosNewsType } from "../../types/mosNewsType";
+import { NewsType } from "../../types/newsType";
 
 interface Props{
   column: string;
+  post: NewsType;
 }
 
-const NewsCard: FC<Props> = ({column}) => {
+const NewsCard: FC<Props> = ({column, post}) => {
 
   const size = column == "small"
 
   return (
     <div className={ size ? `${styles.newsCard} ${styles.bigCard}` : styles.newsCard}>
-      {size ? <BigContent /> : <SmallContent /> }
+      {size ? <BigContent post={post} /> : <SmallContent post={post} /> }
 
       <div className={styles.footer}>
-        <a href={"/"} target="_blank" rel="noreferrer">
-          www.lenta.ru
+        <a href={post.link} target="_blank" rel="noreferrer">
+          { post.link && new URL(post.link).hostname }
         </a>
-        <p>01.01.2002</p>
+        <p>{new Date(post.date).toLocaleDateString()}</p>
       </div>
     </div>
   );
