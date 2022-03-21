@@ -1,4 +1,5 @@
 export interface NewsType {
+  index?: number;
   title: string;
   description: string;
   date: number;

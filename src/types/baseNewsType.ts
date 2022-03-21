@@ -1,5 +1,4 @@
-export interface MosNewsType {
-  id: number;
+export interface BaseNewsType {
   description: string;
   content: string;
   author: string;

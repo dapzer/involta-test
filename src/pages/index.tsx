@@ -1,12 +1,8 @@
 import Head from 'next/head'
 import NewsContainer from "../containers/NewsContainer";
-import { MosNewsType } from "../types/mosNewsType";
-import { FC, useEffect } from "react";
-import { parse } from "rss-to-json";
+import { FC } from "react";
 import { dehydrate, QueryClient } from 'react-query';
-import axios from "axios";
-import { NewsType } from "../types/newsType";
-
+import { getFeed } from '../api/fetchApi';
 
 const Home: FC = () => {
 
@@ -24,13 +20,8 @@ const Home: FC = () => {
 }
 1
 export async function getServerSideProps() {
-  // const response = await parse("https://www.lenta.ru/rss/news", "")
   const queryClient = new QueryClient()
-  const getFeed = async () => {
-    const res = await axios.get("http://localhost:3000/api/feed")
-    return res.data
-  }
-  await queryClient.prefetchQuery('feed', getFeed)
+  await queryClient.prefetchQuery(["1", {sourceUrl: "All", newsLimit: 3}], getFeed)
 
   return {
     props: {

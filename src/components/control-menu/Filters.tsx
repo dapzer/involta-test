@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from "./filters.module.scss"
 import ColumSelector from "../colums-selector/ColumSelector";
+import { useMyContext } from "../../context/MyContext";
 
 const filters = [
   {name: "Все", source: "All"},
@@ -10,12 +11,19 @@ const filters = [
 
 interface Props{
   column: string;
-  changeColumns: (columnQantity: string) => void;
-  setSource: (souce: string) => void
+  changeColumns: (columnQuantity: string, limit: number) => void;
+  setSource: (source: string) => void
   source: string;
 }
 
 const Filters: FC<Props> = ({column, changeColumns, setSource, source}) => {
+
+  const { changePage } = useMyContext()
+
+  const changeFilter = (filter: string) => {
+    changePage(1)
+    setSource(filter)
+  }
 
   return (
     <div className={styles.filters}>
@@ -23,7 +31,7 @@ const Filters: FC<Props> = ({column, changeColumns, setSource, source}) => {
         {filters.map((filter, index) => (
           <button key={`filter-${index}`}
                   className={`${source == filter.source && styles.active}`}
-                  onClick={() => setSource(filter.source)}>{filter.name}</button>
+                  onClick={() => changeFilter(filter.source)}>{filter.name}</button>
         ))}
       </div>
 

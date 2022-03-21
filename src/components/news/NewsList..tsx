@@ -1,32 +1,36 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from "./news-list.module.scss"
 import NewsCard from "./NewsCard";
-import { MosNewsType } from "../../types/mosNewsType";
 import { useQuery } from 'react-query';
-import axios from "axios";
 import { NewsType } from "../../types/newsType";
 import { getFeed } from '../../api/fetchApi';
+import { useMyContext } from "../../context/MyContext";
 
-interface Props{
+interface Props {
   column: string;
   source: string;
 }
 
 const NewsList: FC<Props> = ({column, source}) => {
 
-  const { data } = useQuery(['posts', {source: source}], getFeed)
+  const {page, search, setNewsQuantity, limitNews } = useMyContext()
 
-  console.log(data);
+  const { data, isLoading } = useQuery([`${page}`, {sourceUrl: source, search: search, newsLimit: limitNews}], getFeed)
 
+  useEffect(() => {
+    setNewsQuantity(data && data[1])
+  },[data])
 
   return (
-    <div className={`${column == "big" ? styles.list : styles.fullWidthList}`}>
-
-      {data && data.map((post: NewsType, id) => (
-        <NewsCard column={column} post={post} />
-      ))}
-
-    </div>
+    <>
+      {isLoading && (<h1>Загрузка новостей...</h1>)}
+      {data && data[0].length < 1 && (<h1>Запрос не найден</h1>)}
+      <div className={`${column === "fullwidth" ? styles.list : styles.fullWidthList}`}>
+        {data && data[0].map((post: NewsType) => (
+          <NewsCard key={`post-${post.title}`} column={column} post={post}/>
+        ))}
+      </div>
+    </>
   );
 };
 

@@ -1,26 +1,16 @@
 import axios from "axios";
 
-interface Key {
-  meta: undefined;
-  pageParam: undefined;
-  queryKey: [
-    {
-      0: string;
-      source?: string | undefined;
-    }
-  ]
-}
+export const getFeed = async (key: any) => {
 
-export const getFeed = async (key?: any) => {
-  const source = key?.queryKey[1].source
+  const apiUrl = `http://localhost:3000/api/feed?sort=date&page=${key.queryKey[0]}&limit=${key.queryKey[1].newsLimit}`
 
-  if (source != "All") {
-    const res = await axios.get(`http://localhost:3000/api/feed?sort=date&source=${source}`)
+  if (key.queryKey[1].sourceUrl != "All"){
+    const res = await axios.get(`${apiUrl}&source=${key.queryKey[1].sourceUrl}&search=${key.queryKey[1].search}`)
     return res.data
   }
 
-  const res = await axios.get("http://localhost:3000/api/feed?sort=date")
-  return res.data
+  const res = await axios.get(`${apiUrl}&search=${key.queryKey[1].search}`)
 
+  return res.data
 
 }

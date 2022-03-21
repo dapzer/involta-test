@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
-import styles from "./small-content.module.scss"
-import { MosNewsType } from "../../types/mosNewsType";
+import styles from "./boxed-content.module.scss"
 import { NewsType } from "../../types/newsType";
 
 interface Props {
   post: NewsType;
 }
 
-const SmallContent: FC<Props> = ({post}) => {
+const BoxedContent: FC<Props> = ({post}) => {
   return (
     <div className={styles.content}>
 
@@ -27,4 +26,4 @@ const SmallContent: FC<Props> = ({post}) => {
   );
 };
 
-export default SmallContent;
+export default BoxedContent;

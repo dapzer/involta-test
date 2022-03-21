@@ -1,20 +1,18 @@
 import React, { FC } from 'react';
-import styles from "./big-content.module.scss";
+import styles from "./fullwidth-content.module.scss";
 import Image from "next/image";
-import { MosNewsType } from "../../types/mosNewsType";
 import { NewsType } from "../../types/newsType";
 
 interface Props {
   post: NewsType;
 }
 
-const BigContent: FC<Props> = ({post}) => {
+const FullWidthContent: FC<Props> = ({post}) => {
   return (
     <div className={styles.content}>
       <div>
         {post.img && <Image src={post.img} layout={"fill"} objectFit="cover"/>}
       </div>
-
 
       <div>
         <a href={post.link} target="_blank" rel="noreferrer">
@@ -22,7 +20,6 @@ const BigContent: FC<Props> = ({post}) => {
         </a>
 
         <p>{post.description}</p>
-
       </div>
 
       <a href={post.link} target="_blank" rel="noreferrer" className={styles.footerLink}>
@@ -32,4 +29,4 @@ const BigContent: FC<Props> = ({post}) => {
   );
 };
 
-export default BigContent;
+export default FullWidthContent;

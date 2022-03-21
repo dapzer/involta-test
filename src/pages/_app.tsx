@@ -1,15 +1,15 @@
-import '../styles/globals.scss'
+import '../styles/global.scss'
 import type { AppProps } from 'next/app'
 import Layout from "./layout";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import React from 'react';
-
+import ContextProvider from "../context/MyContext";
 
 
 function MyApp({Component, pageProps}: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient({
-    defaultOptions:{
-      queries:{
+    defaultOptions: {
+      queries: {
         refetchOnWindowFocus: false
       }
     }
@@ -17,11 +17,13 @@ function MyApp({Component, pageProps}: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Hydrate>
+      <ContextProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Hydrate>
+      </ContextProvider>
     </QueryClientProvider>
   )
 }
