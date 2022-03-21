@@ -3,7 +3,7 @@ import styles from "./news-list.module.scss"
 import NewsCard from "./NewsCard";
 import { useQuery } from 'react-query';
 import { NewsType } from "../../types/newsType";
-import { getFeed } from '../../api/fetchApi';
+import { getFeed } from '../../pages/api/_fetchApi';
 import { useMyContext } from "../../context/MyContext";
 
 interface Props {

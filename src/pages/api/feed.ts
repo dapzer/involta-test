@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import parse from 'rss-to-json';
 import { BaseNewsType } from "../../types/baseNewsType";
 import { NewsType } from "../../types/newsType";
+import { string } from "prop-types";
+import { type } from "os";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const mosResponse = await parse("https://www.mos.ru/rss", {});
@@ -43,7 +45,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     news = news && news.filter((post: NewsType) => {
-      return post.description && searchFiltration(post.description, req.query.search as string) || post.title && searchFiltration(post.title, req.query.search as string)
+      // TODO: Fix req.query.search type
+      return post.description && searchFiltration(post.description, req.query.search) || post.title && searchFiltration(post.title, req.query.search)
     })
   }
 
