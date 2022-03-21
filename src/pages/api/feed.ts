@@ -39,14 +39,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     news = news.filter((post) => post.source === req.query.source)
   }
 
-  if (req.query.search != "") {
+  if (req.query.search !== "Not Search" && req.query.search !== undefined) {
     const searchFiltration = (data: string, searchText: string) => {
       return data.toLowerCase().includes(searchText.toLowerCase())
     }
 
     news = news && news.filter((post: NewsType) => {
-      // TODO: Fix req.query.search type
-      return post.description && searchFiltration(post.description, req.query.search) || post.title && searchFiltration(post.title, req.query.search)
+      return post.description && searchFiltration(post.description, req.query.search as string) || post.title && searchFiltration(post.title, req.query.search as string)
     })
   }
 

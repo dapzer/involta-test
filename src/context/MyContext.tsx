@@ -24,7 +24,7 @@ interface Props {
 
 const ContextProvider: FC<Props> = (props) => {
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("Not Search")
   const [page, setPage] = useState(1)
   const [newsQuantity, setNewsQuantity] = useState(0)
   const [limitNews, setLimitNews] = useState(3)
