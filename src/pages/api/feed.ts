@@ -43,7 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     news = news && news.filter((post: NewsType) => {
-      return post.description && searchFiltration(post.description, req.query.search) || post.title && searchFiltration(post.title, req.query.search)
+      return post.description && searchFiltration(post.description, req.query.search as string) || post.title && searchFiltration(post.title, req.query.search as string)
     })
   }
 
