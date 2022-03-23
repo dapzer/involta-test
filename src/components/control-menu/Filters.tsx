@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from "./filters.module.scss"
 import ColumSelector from "../colums-selector/ColumSelector";
-import { useMyContext } from "../../context/MyContext";
+import { useMyContext } from "../../context/MainAppContext";
 
 const filters = [
   {name: "Все", source: "All"},

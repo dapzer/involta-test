@@ -11,10 +11,10 @@ interface Context {
   setLimitNews: (value: number) => void
 }
 
-const MyContext = createContext<Context>(null!)
+const MainAppContext = createContext<Context>(null!)
 
 export const useMyContext = () => {
-  return useContext(MyContext)
+  return useContext(MainAppContext)
 }
 
 interface Props {
@@ -40,9 +40,9 @@ const ContextProvider: FC<Props> = (props) => {
 
 
   return (
-    <MyContext.Provider value={{search, changeSearch, page, changePage, newsQuantity, setNewsQuantity, limitNews, setLimitNews}}>
+    <MainAppContext.Provider value={{search, changeSearch, page, changePage, newsQuantity, setNewsQuantity, limitNews, setLimitNews}}>
       {props.children}
-    </MyContext.Provider>
+    </MainAppContext.Provider>
   )
 }
 

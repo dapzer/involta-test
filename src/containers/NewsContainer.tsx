@@ -1,15 +1,16 @@
 import React, { FC, useCallback, useState } from 'react';
 import Filters from "../components/control-menu/Filters";
 import NewsList from "../components/news/NewsList.";
-import { useMyContext } from "../context/MyContext";
+import { useMyContext } from "../context/MainAppContext";
 
 const NewsContainer: FC = () => {
-  const { setLimitNews } = useMyContext()
+  const { setLimitNews, changePage } = useMyContext()
 
   const [column, setColumn] = useState("boxed")
   const [source, setSource] = useState("All")
 
   const changeColumns = useCallback((columnQuantity: string, limit: number) => {
+    changePage(1)
     setColumn(columnQuantity)
     setLimitNews(limit)
   }, [setColumn])

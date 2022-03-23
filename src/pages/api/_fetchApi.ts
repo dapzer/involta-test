@@ -1,16 +1,10 @@
 import axios from "axios";
+import queryString from "query-string"
 
 export const getFeed = async (key: any) => {
-
-  const apiUrl = `http://localhost:3000/api/feed?sort=date&page=${key.queryKey[0]}&limit=${key.queryKey[1].newsLimit}`
-
-  if (key.queryKey[1].sourceUrl != "All"){
-    const res = await axios.get(`${apiUrl}&source=${key.queryKey[1].sourceUrl}&search=${key.queryKey[1].search}`)
-    return res.data
-  }
-
-  const res = await axios.get(`${apiUrl}&search=${key.queryKey[1].search}`)
+  const apiUrl = process.env.FEED_API_URL || "http://localhost:3000/api/feed"
+  const parse = queryString.stringifyUrl({url: apiUrl, query: key.queryKey[1]})
+  const res = await axios.get(parse)
 
   return res.data
-
 }

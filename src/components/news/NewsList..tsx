@@ -4,7 +4,7 @@ import NewsCard from "./NewsCard";
 import { useQuery } from 'react-query';
 import { NewsType } from "../../types/newsType";
 import { getFeed } from '../../pages/api/_fetchApi';
-import { useMyContext } from "../../context/MyContext";
+import { useMyContext } from "../../context/MainAppContext";
 
 interface Props {
   column: string;
@@ -15,7 +15,7 @@ const NewsList: FC<Props> = ({column, source}) => {
 
   const {page, search, setNewsQuantity, limitNews } = useMyContext()
 
-  const { data, isLoading } = useQuery([`${page}`, {sourceUrl: source, search: search, newsLimit: limitNews}], getFeed)
+  const { data, isLoading } = useQuery(["news", {sort: "date", page: page, source: source, search: search, limit: limitNews}], getFeed)
 
   useEffect(() => {
     setNewsQuantity(data && data[1])

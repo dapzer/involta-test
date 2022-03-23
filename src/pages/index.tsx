@@ -21,7 +21,7 @@ const Home: FC = () => {
 1
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(["1", {sourceUrl: "All", newsLimit: 3, search: "Not Search"}], getFeed)
+  await queryClient.prefetchQuery(["getAllNews", {sort: "date", page: 1, limit: 3, source: "All", search: "Not Search"}], getFeed)
 
   return {
     props: {

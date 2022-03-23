@@ -12,7 +12,7 @@ const Header: FC = () => {
     <div className={`${styles.header} container`}>
       <div className={styles.logo}>
         <h1>Список новостей</h1>
-        <button onClick={async () => await queryClient.refetchQueries()}>
+        <button onClick={async () => await queryClient.invalidateQueries("news")}>
           <Image src="/refresh.svg" alt={"refresh"} width={20} height={16} />
         </button>
       </div>
