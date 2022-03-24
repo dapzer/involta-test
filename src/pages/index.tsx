@@ -2,7 +2,7 @@ import Head from 'next/head'
 import NewsContainer from "../containers/NewsContainer";
 import { FC } from "react";
 import { dehydrate, QueryClient } from 'react-query';
-import { getFeed } from './api/_fetchApi';
+import { getFeed } from '../utils/fetchApi';
 
 const Home: FC = () => {
 
