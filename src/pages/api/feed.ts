@@ -5,7 +5,7 @@ import { NewsType } from "../../types/newsType";
 
 let buffer: NewsType[] = []
 let localeBuffer: NewsType[] = []
-
+let news: NewsType[] = []
 
 const fetchNews = async () => {
   localeBuffer = []
@@ -54,22 +54,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     await fetchNews()
   }
 
-  let news = buffer
+  news = buffer
 
-  if (req.query.sort === "date") {
+  if (req.query.sort && req.query.sort === "date") {
     news = news.sort((a, b) => a.date + b.date)
   }
 
-  if (req.query.source !== "All") {
+  if (req.query.source && req.query.source !== "All") {
     news = news.filter((post) => post.source === req.query.source)
   }
 
-  if (req.query.search !== "Not Search" && req.query.search !== undefined) {
+  if (req.query.search && (req.query.search !== "Not Search")&& req.query.search !== undefined) {
     const searchFiltration = (data: string, searchText: string) => {
       return data.toLowerCase().includes(searchText.toLowerCase())
     }
 
-    news = news && news.filter((post: NewsType) => {
+    news = news.filter((post: NewsType) => {
       return post.description && searchFiltration(post.description, req.query.search as string) || post.title && searchFiltration(post.title, req.query.search as string)
     })
   }
