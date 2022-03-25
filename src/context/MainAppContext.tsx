@@ -1,4 +1,5 @@
 import React, { createContext, FC, ReactNode, useContext, useState } from 'react'
+import { QueryDefaultValue } from "../types/QueryDefaultValue";
 
 interface Context {
   search: string;
@@ -24,7 +25,7 @@ interface Props {
 
 const ContextProvider: FC<Props> = (props) => {
 
-  const [search, setSearch] = useState("Not Search")
+  const [search, setSearch] = useState(`${QueryDefaultValue.search}`)
   const [page, setPage] = useState(1)
   const [newsQuantity, setNewsQuantity] = useState(0)
   const [limitNews, setLimitNews] = useState(3)

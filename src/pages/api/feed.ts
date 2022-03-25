@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import parse from 'rss-to-json';
 import { BaseNewsType } from "../../types/baseNewsType";
 import { NewsType } from "../../types/newsType";
+import { QueryDefaultValue } from '../../types/QueryDefaultValue';
 
 let buffer: NewsType[] = []
 let localeBuffer: NewsType[] = []
@@ -10,7 +11,7 @@ let news: NewsType[] = []
 const fetchNews = async () => {
   localeBuffer = []
   try {
-    const mosResponse = await parse("https://www.mos.ru/rss", {});
+    const mosResponse = await parse(`${process.env.MOS_API_URL}`, {});
     const mosNews = mosResponse.items.map((item: BaseNewsType) => {
       return {
         title: item.title,
@@ -26,7 +27,7 @@ const fetchNews = async () => {
     console.log(`Failed to get data from Mos.ru. ${error.message}`);
   }
   try {
-    const lentaResponse = await parse("https://lenta.ru/rss/news", {})
+    const lentaResponse = await parse(`${process.env.LENTA_API_URL}`, {})
     const lentaNsNews = lentaResponse.items.map((item: BaseNewsType) => {
       return {
         title: item.title,
@@ -60,11 +61,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     news = news.sort((a, b) => a.date + b.date)
   }
 
-  if (req.query.source && req.query.source !== "All") {
+  if (req.query.source && req.query.source !== QueryDefaultValue.source) {
     news = news.filter((post) => post.source === req.query.source)
   }
 
-  if (req.query.search && (req.query.search !== "Not Search")&& req.query.search !== undefined) {
+  if (req.query.search && (req.query.search !== QueryDefaultValue.search) && req.query.search !== undefined) {
     const searchFiltration = (data: string, searchText: string) => {
       return data.toLowerCase().includes(searchText.toLowerCase())
     }

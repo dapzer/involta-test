@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import styles from "./filters.module.scss"
 import ColumSelector from "../colums-selector/ColumSelector";
 import { useMyContext } from "../../context/MainAppContext";
+import { QueryDefaultValue } from '../../types/QueryDefaultValue';
 
 const filters = [
-  {name: "Все", source: "All"},
+  {name: "Все", source: `${QueryDefaultValue.source}`},
   {name: "Lenta.ru", source: "www.lenta.ru"},
   {name: "Mos.ru", source: "www.mos.ru"}
 ]
