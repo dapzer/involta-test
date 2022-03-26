@@ -4,8 +4,11 @@ import Image from 'next/image'
 import Search from "../search/Search";
 import { useQueryClient } from "react-query";
 import Link from 'next/link';
+import { useMyContext } from "../../context/MainAppContext";
 
 const Header: FC = () => {
+
+  const { changePage } = useMyContext()
 
   const queryClient = useQueryClient()
 
@@ -20,7 +23,7 @@ const Header: FC = () => {
     <div className={`${styles.header} container`}>
       <div className={styles.logo}>
         <Link href={"/1"}>
-          <h1>Список новостей</h1>
+          <h1 onClick={() => changePage(1) }>Список новостей</h1>
         </Link>
         <button
           className={rotate ? `${styles.rotate}` : ""}
