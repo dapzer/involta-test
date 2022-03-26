@@ -3,6 +3,7 @@ import styles from "./header.module.scss"
 import Image from 'next/image'
 import Search from "../search/Search";
 import { useQueryClient } from "react-query";
+import Link from 'next/link';
 
 const Header: FC = () => {
 
@@ -11,18 +12,16 @@ const Header: FC = () => {
   const [rotate, setRotate] = useState(false);
 
   const animate = () => {
-
-    // Button begins to shake
     setRotate(true);
-
-    // Buttons stops to shake after 2 seconds
     setTimeout(() => setRotate(false), 500);
   }
 
   return (
     <div className={`${styles.header} container`}>
       <div className={styles.logo}>
-        <h1>Список новостей</h1>
+        <Link href={"/1"}>
+          <h1>Список новостей</h1>
+        </Link>
         <button
           className={rotate ? `${styles.rotate}` : ""}
           onClick={async () => {

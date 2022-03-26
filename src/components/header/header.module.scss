@@ -30,7 +30,13 @@
 
     h1 {
       padding-right: 30px;
+      cursor: pointer;
     }
+
+    h1:hover{
+      color: #0029FF;
+    }
+
   }
 
   .rotate {

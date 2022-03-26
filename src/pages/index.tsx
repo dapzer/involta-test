@@ -1,8 +1,5 @@
 import Head from 'next/head'
-import NewsContainer from "../containers/NewsContainer";
 import { FC } from "react";
-import { dehydrate, QueryClient } from 'react-query';
-import { getFeed } from '../utils/fetchApi';
 
 const Home: FC = () => {
 
@@ -14,20 +11,9 @@ const Home: FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NewsContainer />
+      <h1>Загрузка...</h1>
     </div>
   )
-}
-1
-export async function getServerSideProps() {
-  const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(["getAllNews", {sort: "date", page: 1, limit: 3, source: "All", search: "Not Search"}], getFeed)
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  }
 }
 
 export default Home

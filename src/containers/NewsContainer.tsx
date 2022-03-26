@@ -1,14 +1,20 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Filters from "../components/control-menu/Filters";
 import NewsList from "../components/news/NewsList.";
 import { useMyContext } from "../context/MainAppContext";
-import { QueryDefaultValue } from "../types/QueryDefaultValue";
+import router  from "next/router";
+import queryString from "query-string";
+import PageSelector from "../components/propagination/PageSelector";
 
 const NewsContainer: FC = () => {
-  const { setLimitNews, changePage } = useMyContext()
+  const { setLimitNews, changePage, page, source,  search } = useMyContext()
+
+  useEffect(() => {
+    const query = queryString.stringify({page: page, source: source, search: search})
+    router.push(`?${query}`)
+  }, [page,search,source])
 
   const [column, setColumn] = useState("boxed")
-  const [source, setSource] = useState(`${QueryDefaultValue.source}`)
 
   const changeColumns = useCallback((columnQuantity: string, limit: number) => {
     changePage(1)
@@ -16,14 +22,11 @@ const NewsContainer: FC = () => {
     setLimitNews(limit)
   }, [setColumn])
 
-  const changeFilter = (filter: string) => {
-    setSource(filter)
-  }
-
   return (
     <>
-      <Filters column={column} setSource={changeFilter} source={source} changeColumns={changeColumns} />
-      <NewsList column={column} source={source} />
+      <Filters column={column} changeColumns={changeColumns} />
+      <NewsList column={column}/>
+      <PageSelector />
     </>
   );
 };

@@ -8,12 +8,11 @@ import { useMyContext } from "../../context/MainAppContext";
 
 interface Props {
   column: string;
-  source: string;
 }
 
-const NewsList: FC<Props> = ({column, source}) => {
+const NewsList: FC<Props> = ({column}) => {
 
-  const {page, search, setNewsQuantity, limitNews } = useMyContext()
+  const {page, search, setNewsQuantity, limitNews, source } = useMyContext()
 
   const { data, isLoading } = useQuery(["news", {sort: "date", page: page, source: source, search: search, limit: limitNews}], getFeed)
 

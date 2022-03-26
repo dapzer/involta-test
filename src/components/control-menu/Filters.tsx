@@ -13,17 +13,15 @@ const filters = [
 interface Props{
   column: string;
   changeColumns: (columnQuantity: string, limit: number) => void;
-  setSource: (source: string) => void
-  source: string;
 }
 
-const Filters: FC<Props> = ({column, changeColumns, setSource, source}) => {
+const Filters: FC<Props> = ({column, changeColumns}) => {
 
-  const { changePage } = useMyContext()
+  const { changePage, changeSource, source } = useMyContext()
 
   const changeFilter = (filter: string) => {
     changePage(1)
-    setSource(filter)
+    changeSource(filter)
   }
 
   return (
